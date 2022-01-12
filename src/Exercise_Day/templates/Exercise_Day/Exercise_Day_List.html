@@ -1,0 +1,50 @@
+ <!DOCTYPE html>
+<html>
+<head>
+
+    <script>
+function myFunction() {
+  document.getElementById("ExCatVal").value = {{selectedEC}};
+}
+</script>
+<style>
+    table, th, td {
+  border: 1px solid black;
+  padding: 15px;
+}
+</style>
+</head>
+<body onload="myFunction()">
+
+<br><Br>
+<p align="center"><a href="../home">Home</a> </p>
+<br>
+<form method="get" action=".">
+    <select name="ExCatVal" id="ExCatVal">
+{% for entry in ExCategory %}
+    <option value="{{ entry.id }}" {% if  selectedEC  == entry.id %}selected {%endif%}>{{ entry.Exercise_Cat }} </option>
+{% endfor %}
+</select>
+    <input type="submit" name="" value="Save today's workout">
+<table>
+    <TR>
+        <TD>Exercise Name</TD>
+        <TD>Category</TD>
+        <TD>Exercise Date</TD>
+        <TD>Weight</TD>
+        <TD>Reps</TD>
+        <TD></TD>
+    </TR>
+{% for instance in object_list %}
+    <tr>
+        <td>{{ instance.Name }}</td>
+        <td>{{ instance.Ex_Category }}</td>
+        <td>{{ instance.Ex_Date }}</td>
+        <td>{{ instance.Name.Weight }}</td>
+        <td>{{ instance.Name.Reps }}</td>
+        <td><input type="checkbox" name="id" value="{{ instance.id }}"></td>
+        </tr>
+{% endfor %}
+</table>
+</body>
+</html>

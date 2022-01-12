@@ -1,0 +1,20 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<style>
+</style>
+</head>
+<body>
+
+
+<form action="." method="post">{% csrf_token %}
+    Do you want to delete the task {{ instance.taskName }} ?
+    <input type="submit" value="Yes"><a href="../">Cancel</a>
+
+
+
+</form>
+
+
+</body>
+</html>

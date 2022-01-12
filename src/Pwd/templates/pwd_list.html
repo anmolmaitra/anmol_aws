@@ -1,0 +1,41 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<style>
+.table_center {
+  margin-left: auto;
+  margin-right: auto;
+  width:100%;
+}
+</style>
+</head>
+<body>
+
+{% include 'navbar.html' %}
+<br>
+<br>
+<br>
+<table class="table_center">
+    <tr>
+        <td>Site Name</td>
+        <td>Site URL</td>
+        <td>SiteU</td>
+        <td>SiteP</td>
+        <td>Site Notes</td>
+    </tr>
+
+{% for instance in object_list %}
+    {% if request.user.is_authenticated %}
+        <tr>
+        <td>{{ instance.SName }}</td>
+        <td>{{ instance.SURL }}</td>
+        <td>{{ instance.SUserName }}</td>
+        <td>{{ instance.SPwd }}</td>
+        <td>{{ instance.SNotes }}</td>
+        </tr>
+    {% endif %}
+{% endfor %}
+</table>
+<p align="center"><a href="../home">Home</a> </p>
+</body>
+</html>

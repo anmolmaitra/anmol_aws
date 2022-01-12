@@ -1,0 +1,47 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <script>
+function myFunction() {
+  document.getElementById("taskCatVal").value = {{selectedDD}};
+}
+</script>
+<style>
+    table, th, td {
+  border: 1px solid black;
+  padding: 15px;
+}
+</style>
+</head>
+<body onload="myFunction()">
+
+
+
+<form method="get">
+<select name="taskCatVal" id="taskCatVal">
+{% for entry in taskCategory %}
+    <option value="{{ entry.id }}" {% if  selectedDD  == entry.id %}selected {%endif%}>{{ entry.categoryName }} </option>
+{% endfor %}
+</select>
+    <input type="submit" />
+</form>
+<br><Br>
+<a href="../create_task">Add</a>
+<p align="center"><a href="../home">Home</a> </p>
+<br>
+
+<table>
+{% for instance in object_list %}
+    <tr>
+        <td>{{ instance.taskName }}</td>
+        <td>{{ instance.category }}</td>
+        <td>{{ instance.taskStatus }}</td>
+        <td>{{ instance.completionDt }}</td>
+        <td><a href="{% url 'update-task' instance.id  selectedDD %}">Edit</a></td>
+        <td><a href="{% url 'delete-task' instance.id  selectedDD %}">Delete</a></td>
+        </tr>
+{% endfor %}
+</table>
+
+</body>
+</html>

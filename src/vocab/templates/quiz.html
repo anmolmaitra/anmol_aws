@@ -1,0 +1,84 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<style>
+
+div {
+display: none;
+}
+
+.td_class {
+  border: 1px solid black;
+  padding: 15px;
+}
+
+.quiz_table {
+  margin-left: auto;
+  margin-right: auto;
+  width:100%;
+}
+</style>
+    <script>
+function myFunction(divId) {
+  var x = document.getElementById(divId);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+</head>
+<body>
+
+{% include 'navbar.html' %}
+<br>
+<br>
+<br>
+<table class="quiz_table" id="vocabtable">
+    <script>var i=0;</script>
+    {% for instance in object_list %}
+    <script>
+    var mytable = document.getElementById('vocabtable');
+    var newtr = document.createElement('tr');
+    newtr.id = 'tr'+i;
+    mytable.appendChild(newtr);
+
+    var mytr = document.getElementById('tr'+i);
+    var cellone = document.createElement('td');
+    cellone.id = 'cellone'+i;
+    cellone.innerHTML = '{{instance.1}}';
+    cellone.className = 'td_class';
+    mytr.appendChild(cellone);
+
+
+
+    var celltwo = document.createElement('td');
+    celltwo.id = 'celltwo'+i;
+    celltwo.className = 'td_class';
+    mytr.appendChild(celltwo);
+
+    var div = document.createElement('div');
+    div.id = 'div'+i;
+    div.innerHTML = '{{instance.0}}';
+    celltwo.appendChild(div);
+
+    var cellthree = document.createElement('td');
+    cellthree.id = 'cellthree'+i;
+    cellthree.className = 'td_class';
+    mytr.appendChild(cellthree);
+
+    var button = document.createElement('button');
+    button.id = 'button'+i;
+    button.type = 'button';
+    button.innerHTML = 'Show word';
+    button.setAttribute('onclick','myFunction(\'div'+i+'\')');
+    cellthree.appendChild(button);
+    i=i+1;
+    </script>
+    {% endfor %}
+
+</table>
+<p align="center"><a href="../home">Home</a> </p>
+</body>
+</html>
