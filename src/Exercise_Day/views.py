@@ -21,6 +21,8 @@ class ExerciseDayListView(LoginRequiredMixin, ListView):
          if requestId is not None:
             for EdId in ids:
                 record = Exercise_Day.objects.get(id=EdId)
+                print("Record is "+str(record.Name))
+                delOldEx = Exercise_Day.objects.filter(Name=record.Name).delete()
                 record.id = None
                 today = date.today()
                 record.Ex_Date = today
