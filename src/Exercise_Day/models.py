@@ -5,11 +5,10 @@ from Exercise.models import Exercise
 
 # Create your models here.
 class Exercise_Day(models.Model):
-    Name = models.ForeignKey(Exercise, on_delete=models.CASCADE)
-    Ex_Category = models.ForeignKey(Exercise_Category, on_delete=models.CASCADE)
     Ex_Date = models.DateTimeField()
+    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
 
     def __str__(self):
-        return '%s %s' % (self.Name, self.Ex_Category)
+        return '%s %s' % (self.exercise.Exercise_Name, self.exercise.Category)
 
 

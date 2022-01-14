@@ -37,11 +37,11 @@ function myFunction() {
     </TR>
 {% for instance in object_list %}
     <tr>
-        <td>{{ instance.Name }}</td>
-        <td>{{ instance.Ex_Category }}</td>
+        <td>{{ instance.exercise.Exercise_Name }}</td>
+        <td>{{ instance.exercise.Category }}</td>
         <td>{{ instance.Ex_Date }}</td>
-        <td>{{ instance.Name.Weight }}</td>
-        <td>{{ instance.Name.Reps }}</td>
+        <td>{{ instance.exercise.Weight }}</td>
+        <td>{{ instance.exercise.Reps }}</td>
         <td><input type="checkbox" name="id" value="{{ instance.id }}"></td>
         </tr>
 {% endfor %}

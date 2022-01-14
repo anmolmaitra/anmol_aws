@@ -18,26 +18,27 @@ class ExerciseDayListView(LoginRequiredMixin, ListView):
     def dispatch(self, *args, **kwargs):
          requestId = self.request.GET.get('id')
          ids = self.request.GET.getlist('id')
+         print("ids "+str(ids))
          if requestId is not None:
             for EdId in ids:
                 record = Exercise_Day.objects.get(id=EdId)
-                print("Record is "+str(record.Name))
-                delOldEx = Exercise_Day.objects.filter(Name=record.Name).delete()
+                print("record name "+record.exercise.Exercise_Name)
+                delOldEx = Exercise_Day.objects.filter(exercise__Exercise_Name=record.exercise.Exercise_Name).delete()
                 record.id = None
                 today = date.today()
                 record.Ex_Date = today
                 record.save()
-                return HttpResponseRedirect("/exerciseday_list/?ExCatVal="+self.request.GET.get('ExCatVal'))
+            return HttpResponseRedirect("/exerciseday_list/?ExCatVal="+self.request.GET.get('ExCatVal'))
          return super().dispatch(*args, **kwargs)
 
     def get_queryset(self):
-         result = Exercise_Day.objects.order_by('Ex_Date', 'Ex_Category')
+         result = Exercise_Day.objects.order_by('Ex_Date')
          ec_filter = self.request.GET.get('ExCatVal')
 
          if ec_filter is not None:
              selectedCat = Exercise_Category.objects.get(id=ec_filter)
              if selectedCat.Exercise_Cat != "ALL":
-                result = Exercise_Day.objects.filter(Ex_Category=ec_filter)
+                result = Exercise_Day.objects.filter(exercise__Category=ec_filter)
          return result
 
     def get_context_data(self, **kwargs):
