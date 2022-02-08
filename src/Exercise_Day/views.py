@@ -37,11 +37,12 @@ class ExerciseDayListView(LoginRequiredMixin, ListView):
          if ec_filter is not None:
              selectedCat = Exercise_Category.objects.get(id=ec_filter)
              if selectedCat.Exercise_Cat != "ALL":
-                result = Exercise_Day.objects.filter(exercise__Category=ec_filter)
+                result = Exercise_Day.objects.filter(exercise__Category=ec_filter).order_by('Ex_Date')
          return result
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        print("Inside get_context_data")
         context['ExCategory'] = Exercise_Category.objects.all()
         context['selectedEC'] = self.request.GET.get('ExCatVal')
         return context
